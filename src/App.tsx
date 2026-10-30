@@ -116,17 +116,12 @@ function App() {
   )
 
   return (
-    <div
-      className={[
-        'relative min-h-screen overflow-hidden bg-[#04060d] text-slate-100 transition-colors duration-500',
-        possessed ? 'bg-[#12070b] text-rose-50' : 'bg-[#04060d] text-slate-100',
-      ].join(' ')}
-    >
-      <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="absolute -left-16 top-12 h-80 w-80 rounded-full bg-cyan-500/15 blur-3xl" />
-        <div className="absolute right-0 top-24 h-96 w-96 rounded-full bg-violet-500/15 blur-3xl" />
-        <div className="absolute bottom-0 left-1/3 h-72 w-72 rounded-full bg-rose-500/10 blur-3xl" />
-      </div>
+    <div className={['vault-shell', possessed ? 'possessed' : 'stable'].join(' ')}>
+      <div className="holo-grid" />
+      <div className="orbital-ring orbital-ring-one" />
+      <div className="orbital-ring orbital-ring-two" />
+      <div className="particle-field" aria-hidden="true" />
+      <div className="scanline-overlay" aria-hidden="true" />
 
       <header className="relative z-10 border-b border-cyan-500/20 bg-slate-950/60 backdrop-blur-md">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
@@ -141,7 +136,7 @@ function App() {
             type="button"
             onClick={() => setPossessed((value) => !value)}
             className={[
-              'rounded-full border px-4 py-2 text-xs font-bold uppercase tracking-[0.28em] transition-all',
+              'rounded-full border px-4 py-2 text-xs font-bold uppercase tracking-[0.28em] transition-all duration-500',
               possessed
                 ? 'border-rose-400/60 bg-rose-500/15 text-rose-100 shadow-[0_0_24px_rgba(244,63,94,0.35)]'
                 : 'border-cyan-400/40 bg-cyan-500/10 text-cyan-100 shadow-[0_0_24px_rgba(34,211,238,0.2)]',
@@ -158,11 +153,11 @@ function App() {
             { label: 'Stored Dossiers', value: '128', icon: Shield },
             { label: 'Active Wards', value: '19', icon: Sparkles },
             { label: 'Threat Average', value: `${averageThreat}/5`, icon: AlertTriangle },
-            { label: 'Live Feed', value: 'Nominal', icon: Activity },
+            { label: 'Live Feed', value: possessed ? 'Breached' : 'Nominal', icon: Activity },
           ].map(({ label, value, icon: Icon }) => (
             <div
               key={label}
-              className="rounded-2xl border border-white/10 bg-slate-950/50 p-4 shadow-[0_0_30px_rgba(15,23,42,0.45)] backdrop-blur-md"
+              className="glass-panel rounded-2xl p-4 shadow-[0_0_30px_rgba(15,23,42,0.45)]"
             >
               <div className="mb-3 flex items-center justify-between text-cyan-200">
                 <span className="text-[10px] uppercase tracking-[0.32em] text-slate-300">{label}</span>
@@ -219,7 +214,7 @@ function App() {
               filteredEvidence.map((item) => (
                 <article
                   key={item.id}
-                  className="rounded-3xl border border-white/10 bg-slate-950/55 p-5 shadow-[0_0_32px_rgba(15,23,42,0.6)] backdrop-blur-md"
+                  className="glass-panel rounded-3xl p-5 shadow-[0_0_32px_rgba(15,23,42,0.6)]"
                 >
                   <div className="mb-4 flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
                     <div>
@@ -259,7 +254,7 @@ function App() {
           </div>
 
           <aside className="space-y-4">
-            <div className="rounded-3xl border border-white/10 bg-slate-950/55 p-5 backdrop-blur-md">
+            <div className="glass-panel rounded-3xl p-5">
               <p className="mb-4 text-[10px] uppercase tracking-[0.38em] text-cyan-300/80">Live Timeline</p>
               <div className="space-y-4">
                 {[
@@ -281,7 +276,7 @@ function App() {
               </div>
             </div>
 
-            <div className="rounded-3xl border border-white/10 bg-slate-950/55 p-5 backdrop-blur-md">
+            <div className="glass-panel rounded-3xl p-5">
               <p className="mb-4 text-[10px] uppercase tracking-[0.38em] text-violet-300/80">Ward Status</p>
               <ul className="space-y-3 text-sm text-slate-200">
                 {['North Entry Seal', 'Basement Echo Lattice', 'Archive Glass Mesh'].map((ward) => (
